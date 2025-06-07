@@ -1,0 +1,27 @@
+/* 1) In your global CSS file: */
+
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  /* Don’t set background-image here; move it into ::before instead */
+  /* If you had other background properties (color, etc.), keep them here */
+}
+
+/* 2) Create a full-screen, behind-the-scenes pseudo-element */
+body::before {
+  content: "";
+  position: fixed; /* ensure it always covers the viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./assets/bg-pic.png"); /* adjust path as needed */
+  background-size: cover; /* or contain, depending on how you want it to scale */
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: blur(8px); /* ← this blurs the image by 8px; tweak as desired */
+  transform: scale(1.05); /* optional: slightly scale up so edges don’t show */
+  z-index: -1; /* push it behind all other content */
+}
