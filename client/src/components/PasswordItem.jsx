@@ -10,7 +10,7 @@ function PasswordItem({ password, updateLogic }) {
   const getChar_class = (char) => {
     let upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let nums = "0123456789";
-    let chars = "!@#$%^&*()_+=";
+    let chars = "!@#$%^&*()_+={}[]<>,.?/:\"|\\;'~";
     if (upper.includes(char)) return "text-yellow-500";
     if (nums.includes(char)) return "text-blue-500";
     if (chars.includes(char)) return "text-red-500";

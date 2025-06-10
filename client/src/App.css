@@ -25,3 +25,7 @@ body::before {
   transform: scale(1.05); /* optional: slightly scale up so edges don’t show */
   z-index: -1; /* push it behind all other content */
 }
+
+label {
+  color: white;
+}

@@ -31,10 +31,12 @@ function PasswordForm({ postPassword, updateLogic }) {
   /**************************************************************/
   return (
     <section className=" flex flex-col gap-2">
-      <div className=" w-full max-w-md shadow-md rounded-lg px-4 py-3 bg-gray-800 text-orange-500">
-        <h1 className="text-white text-center my-3">Password Generator</h1>
-        <div className="flex flex-col shadow rounded-lg overflow-hidden mb-4 gap-1.5">
-          <label htmlFor="userPassword"> Password</label>
+      <div className=" w-full max-w-md shadow-lg shadow-gray-500 border border-white bg-[#41413c]/35 mb-3 rounded-lg p-8">
+        <div className="flex flex-col shadow rounded-lg  mb-4 gap-1.5">
+          <label htmlFor="userPassword" className="text-white">
+            {" "}
+            Password
+          </label>
 
           <input
             id="userPassword"
@@ -44,9 +46,11 @@ function PasswordForm({ postPassword, updateLogic }) {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            className="bg-blue-400"
+            className="rounded-md border-white bg-gray-100/25"
           />
-          <label htmlFor="accountName"></label>
+          <label htmlFor="accountName" className="text-white ">
+            Account Name
+          </label>
           <input
             type="text"
             id="accountName"
@@ -55,7 +59,7 @@ function PasswordForm({ postPassword, updateLogic }) {
             onChange={(e) => {
               setAccount(e.target.value);
             }}
-            className="bg-blue-400"
+            className="rounded-md border-white bg-gray-100/25"
           />
         </div>
         <div className="flex flex-col text-sm gap-x-2">
@@ -124,16 +128,16 @@ function PasswordForm({ postPassword, updateLogic }) {
             <label htmlFor="save">Save</label>
           </div>
         </div>
-        <div className="flex justify-center bg-white">
+        <div className="flex justify-center mt-3">
           <button
-            className="text-gray-50 bg-green-800 px-2.5 py-1"
+            className="bg-[#41413c]/35 rounded-lg px-5 py-2 border border-white hover:shadow-md shadow-gray-700"
             onClick={postWrapper}
           >
             Click
           </button>
         </div>
       </div>
-      <div className="">
+      <div key={generatedPassword._id + Date.now()} className="">
         {generatedPassword && (
           <div className="">
             <PasswordItem

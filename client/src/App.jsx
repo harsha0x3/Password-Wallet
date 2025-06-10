@@ -5,24 +5,47 @@ import PasswordForm from "./components/PasswordForm";
 import PasswordItem from "./components/PasswordItem";
 
 function App() {
-  /***********************************************************/
-
   const { allPasswords, postPassword, updatePassword } = usePassword();
+  const [activeTab, setActiveTab] = useState("form");
 
-  /**************************************************************/
   return (
-    <div className="flex w-screen h-screen px-4 py-5 box-border">
-      {/* Left half - Password form */}
-      <div className="w-1/2 flex justify-center items-center">
-        <PasswordForm
-          postPassword={postPassword}
-          updateLogic={updatePassword}
-        />
+    <div className="min-h-screen text-white flex flex-col items-center">
+      <h1 className="text-4xl font-bold text-center mt-6 mb-4">
+        Password Manager
+      </h1>
+
+      {/* Mobile Tabs */}
+      <div className="md:hidden flex gap-4 mb-4">
+        <button
+          className={`px-4 py-2 rounded ${
+            activeTab === "form" ? "bg-white text-black" : "bg-gray-700"
+          }`}
+          onClick={() => setActiveTab("form")}
+        >
+          Form
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${
+            activeTab === "list" ? "bg-white text-black" : "bg-gray-700"
+          }`}
+          onClick={() => setActiveTab("list")}
+        >
+          Saved Passwords
+        </button>
       </div>
 
-      {/* Right half - Scrollable password list */}
-      <div className="w-1/3 flex justify-center items-center mt-5 border border-white p-4">
-        <div className="h-full overflow-y-auto max-h-full w-full px-4">
+      {/* Desktop Layout */}
+      <div className="hidden md:flex w-full max-w-6xl px-4 gap-4">
+        {/* Left - Form */}
+        <div className="flex-grow flex justify-center items-start">
+          <PasswordForm
+            postPassword={postPassword}
+            updateLogic={updatePassword}
+          />
+        </div>
+
+        {/* Right - Fixed width list */}
+        <div className="w-[400px] border border-white rounded p-4 overflow-y-auto max-h-[80vh]">
           {allPasswords.map((item) => (
             <PasswordItem
               key={item._id}
@@ -31,6 +54,30 @@ function App() {
             />
           ))}
         </div>
+      </div>
+
+      {/* Mobile Tabs Content */}
+      <div className="md:hidden w-full px-4">
+        {activeTab === "form" && (
+          <div className="flex justify-center">
+            <PasswordForm
+              postPassword={postPassword}
+              updateLogic={updatePassword}
+            />
+          </div>
+        )}
+
+        {activeTab === "list" && (
+          <div className="mt-4 border border-white rounded p-4 overflow-y-auto max-h-[70vh]">
+            {allPasswords.map((item) => (
+              <PasswordItem
+                key={item._id}
+                password={item}
+                updateLogic={updatePassword}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

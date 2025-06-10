@@ -76,7 +76,11 @@ const createPassword = async (req, res) => {
         password: passwordToSet,
       });
     } else {
-      generatedPassword = { account: account, password: passwordToSet };
+      generatedPassword = {
+        account: account,
+        password: passwordToSet,
+        _id: new Date(),
+      };
     }
 
     res.status(200).json({ generatedPassword });
