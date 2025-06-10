@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faCheck,
+  faCopy,
   faEye,
   faEyeSlash,
   faFloppyDisk,
@@ -14,6 +16,7 @@ function PasswordItem({ password, updateLogic }) {
   const [editAccount, setEditAccount] = useState(account);
   const [editLocalPassword, setEditLocalPassword] = useState(localPassword);
   const [show, setShow] = useState(false);
+  const [copied, setCopied] = useState(false);
   const getChar_class = (char) => {
     let upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let nums = "0123456789";
@@ -42,6 +45,17 @@ function PasswordItem({ password, updateLogic }) {
     }
     setEdit((prev) => !prev);
     console.log(`edit ${edit}`);
+  };
+
+  const copyPasswordToClipboard = async () => {
+    try {
+      window.navigator.clipboard.writeText(localPassword);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.log(error);
+      alert("Failed to copy" + error);
+    }
   };
 
   return (
@@ -85,6 +99,10 @@ function PasswordItem({ password, updateLogic }) {
           <button className="hover:cursor-pointer" onClick={handleEdit}>
             <FontAwesomeIcon icon={edit ? faFloppyDisk : faPenToSquare} />
           </button>
+          <button onClick={copyPasswordToClipboard}>
+            <FontAwesomeIcon icon={copied ? faCheck : faCopy} />
+          </button>
+          {copied && <p>Copied..</p>}
         </div>
       </div>
 
