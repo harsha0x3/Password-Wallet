@@ -1,4 +1,11 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEye,
+  faEyeSlash,
+  faFloppyDisk,
+  faPenToSquare,
+} from "@fortawesome/free-solid-svg-icons";
 
 function PasswordItem({ password, updateLogic }) {
   const [edit, setEdit] = useState(false);
@@ -51,7 +58,7 @@ function PasswordItem({ password, updateLogic }) {
         {show ? (
           <div
             id="pass"
-            className=" w-full py-1 px-3  border-white bg-gray-200/25 mb-3 rounded-lg p-4"
+            className=" w-full py-1 px-3  border-white bg-gray-200/25 rounded-lg p-4"
           >
             {localPassword.split("").map((char, index) => (
               <span key={index} className={getChar_class(char)}>
@@ -62,7 +69,7 @@ function PasswordItem({ password, updateLogic }) {
         ) : (
           <div
             id="pass"
-            className=" w-full py-1 px-3  border-white bg-gray-200/25 mb-3 rounded-lg p-4"
+            className=" w-full py-1 px-3  border-white bg-gray-200/25 rounded-lg p-4"
           >
             {Array.from({ length: localPassword.length }).map((_, index) => (
               <span className="text-black" key={index}>
@@ -71,15 +78,16 @@ function PasswordItem({ password, updateLogic }) {
             ))}
           </div>
         )}
-        <button onClick={() => setShow((prev) => !prev)}>sho</button>
+        <div className="flex items-center justify-center gap-3 mt-2">
+          <button onClick={() => setShow((prev) => !prev)}>
+            <FontAwesomeIcon icon={show ? faEyeSlash : faEye} />
+          </button>
+          <button className="hover:cursor-pointer" onClick={handleEdit}>
+            <FontAwesomeIcon icon={edit ? faFloppyDisk : faPenToSquare} />
+          </button>
+        </div>
       </div>
 
-      <button
-        className="hover:cursor-pointer bg-green-600 hover:bg-green-500 rounded-lg"
-        onClick={handleEdit}
-      >
-        {edit ? "Save" : "Edit"}
-      </button>
       {edit && (
         <div className="flex flex-col gap-0.5 border border-white bg-[#41413c]/35 mb-3 rounded-lg p-4">
           <label htmlFor="account">Account</label>

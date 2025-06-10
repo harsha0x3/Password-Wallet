@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function usePassword() {
   const [allPasswords, setAllPasswords] = useState([]);
 
   const fetchPasswords = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/v1/passwords", {
+      const response = await fetch(`${API_BASE_URL}/api/v1/passwords`, {
         method: "GET",
       });
       const result = await response.json();
@@ -22,7 +23,7 @@ function usePassword() {
   };
 
   const postPassword = async (passwordData) => {
-    const response = await fetch("http://localhost:3000/api/v1/passwords", {
+    const response = await fetch(`${API_BASE_URL}/api/v1/passwords`, {
       method: "POST",
       body: JSON.stringify(passwordData),
       headers: { "content-type": "application/json" },
@@ -46,7 +47,7 @@ function usePassword() {
 
   const updatePassword = async (id, updatedData) => {
     try {
-      await fetch(`http://localhost:3000/api/v1/passwords/${id}`, {
+      await fetch(`${API_BASE_URL}/api/v1/passwords/${id}`, {
         method: "PATCH",
         body: JSON.stringify(updatedData),
         headers: { "content-type": "application/json" },

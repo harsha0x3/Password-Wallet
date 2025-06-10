@@ -133,20 +133,20 @@ function PasswordForm({ postPassword, updateLogic }) {
             className="bg-[#41413c]/35 rounded-lg px-5 py-2 border border-white hover:shadow-md shadow-gray-700"
             onClick={postWrapper}
           >
-            Click
+            Generate
           </button>
         </div>
       </div>
-      <div key={generatedPassword._id + Date.now()} className="">
-        {generatedPassword && (
+      {generatedPassword && (
+        <div key={generatedPassword._id || Date.now()} className="">
           <div className="">
             <PasswordItem
               password={generatedPassword}
               updateLogic={updateLogic}
             />
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }
